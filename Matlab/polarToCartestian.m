@@ -23,10 +23,13 @@ radii = linspace(0,midY,midY);
 
 % get all the angles needed for this resolution:
 theta = linspace(2*pi,0,resolution);
+
 % get all the polar coordinates needed:
 % NB swap here to get a 'vertical' orientation!
-% [th,r] = meshgrid(theta,radii);
+% [r,th] = meshgrid(radii,theta);
 [th,r] = meshgrid(theta,radii);
+
+
 % now interpolate the input image with these coordinates
 
 % first get the cartesian coordinates:
