@@ -1,16 +1,22 @@
 % Jens Raaby
 % February 2013
 
-function [rectangular] = polarToCartestian(polarim, resolution)
+function [rectangular] = polarToCartestian(polarim, resolution, startdeg, finishdeg)
 %POLARTOCARTESIAN Converts a polar image (generally a square image with
 %circular content) into a rectangular Cartesian plot.
 %   POLARIM - the image which will be converted - the centre is the origin
 %   for the transform
 %   RESOLUTION - the number of horizontal pixels in the resulting image.
+%   STARTDEG - the angle to start sampling from
+%   FINISHDEG - the angle to finish sampling at
 
 
 if (nargin<2)
     resolution = 360;
+end
+if (nargin<3)
+    startdeg = 360;
+    finishdeg = 0;
 end
 
 [M,N] = size(polarim);
@@ -22,7 +28,7 @@ midX = (N+1)/2;
 radii = linspace(0,midY,midY);
 
 % get all the angles needed for this resolution:
-theta = linspace(2*pi,0,resolution);
+theta = linspace(deg2rad(startdeg),deg2rad(finishdeg),resolution);
 
 % get all the polar coordinates needed:
 % NB swap here to get a 'vertical' orientation!
